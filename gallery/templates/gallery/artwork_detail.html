@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #f4f4f4;
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .container {
+        max-width: 1000px;
+        margin: 2rem auto;
+        padding: 1.5rem;
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .full-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+    }
+
+    .details {
+        text-align: left;
+        margin-top: 1.5rem;
+    }
+
+    .details h2 {
+        margin-bottom: 0.5rem;
+        font-size: 1.8rem;
+    }
+
+    .details p {
+        margin: 0.3rem 0;
+        font-size: 1rem;
+        color: #444;
+    }
+
+    a.back-link {
+        display: inline-block;
+        margin-top: 2rem;
+        color: #007bff;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    a.back-link:hover {
+        text-decoration: underline;
+    }
+
+    .interaction-summary {
+        margin-top: 1.5rem;
+        font-size: 1rem;
+        color: #666;
+    }
+</style>
+
+<div class="container">
+    <img src="{{ artwork.image.url }}" alt="{{ artwork.title }}" class="full-image">
+    
+    <div class="details">
+        <h2>{{ artwork.title }}</h2>
+        <p><strong>Artist:</strong> {{ artwork.artist.username }}</p>
+        <p><strong>Uploaded on:</strong> {{ artwork.created_at|date:"F d, Y" }}</p>
+        <p><strong>Description:</strong> {{ artwork.description }}</p>
+        <p><strong>Likes:</strong> {{ artwork.likes.count }}</p>
+    </div>
+
+    <div class="interaction-summary">
+        <p><a href="{% url 'gallery:profile' artwork.artist.username %}">View {{ artwork.artist.username }}'s profile</a></p>
+    </div>
+
+    <a href="{% url 'gallery:gallery' %}" class="back-link">← Back to Gallery</a>
+</div>
+{% endblock %}
+

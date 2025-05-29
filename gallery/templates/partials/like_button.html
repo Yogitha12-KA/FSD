@@ -1,0 +1,22 @@
+<style>
+    .btn-icon {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 1.2rem;
+    }
+    .btn-icon.liked i {
+        color: red;
+    }
+</style>
+<form 
+    hx-post="{% url 'gallery:like_artwork' artwork.id %}" 
+    hx-swap="outerHTML" 
+    hx-target="this"
+    method="POST"
+>
+    {% csrf_token %}
+    <button type="submit" class="btn-icon {% if artwork.liked_by_user %}liked{% endif %}" title="Like">
+        <i class="{% if artwork.liked_by_user %}fas{% else %}far{% endif %} fa-heart"></i>
+    </button>
+</form>

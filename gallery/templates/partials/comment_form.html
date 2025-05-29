@@ -1,0 +1,26 @@
+<style>
+  /* Show spinner when HTMX is loading */
+  .htmx-request #comment-spinner {
+      display: inline-block !important;
+  }
+</style>
+{% load static %}  
+{% if user.is_authenticated %}
+<form
+    hx-post="{% url 'gallery:add_comment' artwork.id %}"
+    hx-swap="beforebegin"
+    hx-target="#comment-list"
+    hx-indicator="#comment-spinner"
+    method="POST"
+    style="margin-top:1rem"
+>
+    {% csrf_token %}
+    <textarea name="text" rows="2" required placeholder="Write a comment..." style="width:100%;padding:.5rem;border-radius:6px;border:1px solid #ccc"></textarea>
+    <button type="submit" style="margin-top:.5rem;padding:.45rem 1rem;border:none;border-radius:6px;background:#007bff;color:#fff;cursor:pointer">
+        Post
+    </button>
+    <img id="comment-spinner" src="{% static 'spinner.svg' %}" style="width:20px;display:none;margin-left:.5rem">
+</form>
+{% else %}
+<p><a href="{% url 'gallery:login' %}">Login to comment</a>.</p>
+{% endif %}
