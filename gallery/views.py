@@ -162,5 +162,5 @@ def follow_artist(request, username):
     target_user = get_object_or_404(User, username=username)
     follow_relation, created = Follow.objects.get_or_create(follower=request.user, following=target_user)
     if not created:
-        follow_relation.delete()
+     
     
