@@ -163,5 +163,4 @@ def follow_artist(request, username):
     follow_relation, created = Follow.objects.get_or_create(follower=request.user, following=target_user)
     if not created:
         follow_relation.delete()
-    return redirect('profile', username=username)
-
+    
