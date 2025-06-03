@@ -18,7 +18,7 @@ urlpatterns = [
     path('artwork/<int:pk>/', views.artwork_detail, name='artwork_detail'),
     path('follow/<str:username>/', views.follow_user, name='follow_user'),
     path('artwork/<int:artwork_id>/comment/', views.comment_artwork, name='comment_artwork'),
-    
+
     
 
 ]
